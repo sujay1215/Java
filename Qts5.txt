@@ -1,0 +1,66 @@
+/*5) create a class "Car" with some members. ( do not implement "Serializable" for "Car")
+Derive a class "Nano" from it. have some members in "Nano" also. (implement "Serializable")
+instantiate "Nano" and store this instance in a file. (Serialization).
+read the file and read the object of "Nano" .		(Deserialiation) . 
+Observe what happens when u serialize a child class.
+is it persist ur parent class also ? */
+
+package Files;
+
+import java.io.*;
+
+public class Vehicle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Nano n = new Nano();
+		n.place = "Mumbai";
+		n.uid = 106;
+		n.modelid = "Nano-XOXO";
+		try {
+			FileOutputStream fis = new FileOutputStream(
+					"C:\\Users\\admin\\Desktop\\DAC_DBDA_Aug_19_JavaSE\\Day_5\\With_Serializable\\serial.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fis);
+			oos.writeObject(n);
+			System.out.println(n.modelid + "\t" + n.place + "\t" + n.uid);
+			oos.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		n = null;
+		try {
+			FileInputStream fos = new FileInputStream(
+					"C:\\Users\\admin\\Desktop\\DAC_DBDA_Aug_19_JavaSE\\Day_5\\With_Serializable\\serial.txt");
+			ObjectInputStream ois = new ObjectInputStream(fos);
+			Nano n1 = (Nano) ois.readObject();
+			System.out.println(n1.modelid + "\t" + n1.place + "\t" + n1.uid);
+			ois.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+
+}
+
+class Car {
+	int uid = 523;
+	String place = "Delhi";
+
+	Car() {
+		this.place = place;
+		this.uid = uid;
+	}
+
+}
+
+class Nano extends Car implements Serializable {
+
+	String modelid;
+
+	Nano() {
+		super();
+		this.modelid = modelid;
+	}
+
+}

@@ -1,0 +1,97 @@
+Question
+Person class implements Serializable with
+	private String name
+	private int age
+
+		getters and setters
+		parameterized constructor
+Student extends Person
+	private int rollno
+		getter and setters
+		parameterized constructor accepting name,age and rollno
+			pass name and age to the super constructor
+Serial class with main
+	create one object of Student, write it inside file and then read.
+------------------------------------------------------------------------------------------------
+package Files;
+
+import java.io.*;
+import java.io.Serializable;
+
+public class serial {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Student s = new Student(12, "Ajay", 65);
+		try {
+			FileOutputStream fos = new FileOutputStream("C:\\Users\\admin\\Desktop\\S_40\\Serial.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(s);
+			oos.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		System.out.println(s.age + "\t" + s.name + "\t" + s.rollno);
+		s = null;
+		try {
+			FileInputStream fis = new FileInputStream("C:\\Users\\admin\\Desktop\\S_40\\Serial.txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Student s5 = (Student) ois.readObject();
+			System.out.println(s5.age + "\t" + s5.name + "\t" + s5.rollno);
+			ois.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+
+}
+
+class Person implements Serializable {
+	int age;
+	String name;
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	Person(int age, String name) {
+		this.name = name;
+		this.age = age;
+	}
+}
+
+class Student extends Person {
+	int rollno;
+
+	Student() {
+		super(19, "farad");
+		this.rollno = rollno;
+	}
+
+	Student(int age, String name, int rollno) {
+		super(age, name);
+		this.rollno = rollno;
+
+	}
+
+	public int getRollno() {
+		return rollno;
+	}
+
+	public void setRollno(int rollno) {
+		this.rollno = rollno;
+	}
+}
