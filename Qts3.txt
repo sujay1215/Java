@@ -1,0 +1,94 @@
+/*3) maintain ICC ranking of at least 5 batsmen in the "HashMap".
+list should be maintain as "rank" "name"
+e.g. "1" "Sachin Tendulkar".
+Now ask any rank bet'n 1 to 5 from user. ( user input).
+if user asks for a particular rank , retrieve batsman name for that rank from the HashMap.*/
+package HashMap;
+import java.util.*;
+import java.io.*;
+import java.util.Map.*;
+
+class Cricket implements Serializable{
+	String name;
+	Cricket(String name){
+		this.name=name;
+	}
+	@Override
+	public String toString() {
+		return "" + name;
+	}
+	
+}
+
+public class DemoMap1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Cricket c1=new Cricket("Sachin");
+		Cricket c2=new Cricket("Rohit");
+		Cricket c3=new Cricket("Virat");
+		Cricket c4=new Cricket("Ganguly");
+		Cricket c5=new Cricket("Dravid");
+		Cricket c6=new Cricket("Dhoni");
+	
+	Map<Integer,Cricket> m=new HashMap<Integer,Cricket>();
+	m.put(1,c1);
+	m.put(2, c2);
+	m.put(3, c3);
+	m.put(4, c4);
+	m.put(5, c5);
+	m.put(6, c6);
+	
+	Set<Entry<Integer,Cricket>> set=m.entrySet();
+	Iterator<Entry<Integer, Cricket>> i=set.iterator();
+	while(i.hasNext())
+	{
+		Map.Entry<Integer,Cricket> me=(Entry<Integer,Cricket>)i.next();
+		System.out.print(me.getKey()+ ":");
+		System.out.println(me.getValue());
+	}
+	
+	try
+	{
+		FileOutputStream fos=new FileOutputStream("e:\\sanika.txt");
+		ObjectOutputStream oos=new ObjectOutputStream(fos);
+		oos.writeObject(m);
+		oos.close();
+	}catch(Exception e)
+	{
+		System.out.println(e);
+	}
+	
+	
+	try {
+		FileInputStream fis=new FileInputStream("e:\\sanika.txt");
+		ObjectInputStream ois=new ObjectInputStream(fis);
+		
+		Map<?,?> oe	=(Map<?,?>)ois.readObject();
+		int rank;
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter Rank of player u want");
+		rank=in.nextInt();
+		if(rank>0 && rank<7) {
+			Cricket ref=(Cricket)oe.get(rank);
+			System.out.println(ref.name);
+		}
+		else {
+			System.out.println("Invalid Choice");
+		}
+		Set<?> set1=oe.entrySet();
+		Iterator<Entry<Integer, Cricket>> i1=set.iterator();
+		while(i1.hasNext())
+		{
+			Map.Entry<Integer,Cricket> me1=(Entry<Integer,Cricket>)i1.next();
+			System.out.print(me1.getKey()+ ":");
+			System.out.println(me1.getValue());
+		}
+	}catch(Exception e) {
+		System.out.println(e);
+	}
+	
+	
+	}
+	}
+
