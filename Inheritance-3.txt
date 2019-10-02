@@ -1,0 +1,50 @@
+class Parent
+{
+	/*Parent()
+	{
+		System.out.println("In base-Default");
+	}*/
+	Parent(int a)
+	{
+		System.out.println("In base-Param");
+	}
+}
+
+class Child extends Parent
+{
+	Child()
+	{
+		super(5);
+		System.out.println("In Sub1-Default");
+	}
+	Child(int a)
+	{
+		super(8);
+		System.out.println("In Sub1-Param");
+	}
+}
+
+class Child2 extends Parent
+{
+	Child2()
+	{
+		super(5);
+		System.out.println("In Sub2-Default");
+	}
+	Child2(int a)
+	{
+		super(8);
+		System.out.println("In Sub2-Param");
+	}
+}
+public class Inheritance3 
+{
+
+	public static void main(String[] args) 
+	{
+		//Child s=new Child(20);
+		Child2 s1=new Child2();
+
+	}
+
+}

@@ -1,0 +1,29 @@
+class Vehicle
+{
+	public void start()
+	{
+		System.out.println("Start vehicle");
+	}
+}
+
+class Fourwheeler extends Vehicle
+{
+	public void start()
+	{
+		System.out.println("Car Start");
+	}
+}
+public class Inheritance2 
+{
+
+	public static void main(String[] args) 
+	{
+		Vehicle v=new Vehicle();
+          v.start();
+         Fourwheeler fw=new Fourwheeler();
+         fw.start();
+         Vehicle v1=new Fourwheeler();
+         v1.start();
+	}
+
+}
